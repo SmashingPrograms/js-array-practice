@@ -7,7 +7,15 @@
 
 
 
-
+function repeatTimes(str, i) {
+  arr = [];
+  for (let j = 0; j < i; j++) {
+    arr.push(str);
+  };
+  return arr;
+};
+console.log("Question 1 result:")
+console.log(repeatTimes("Wolf", 66));
 
 
 
@@ -24,7 +32,18 @@
 // Put your answer below -------------------------
 
 
-
+function reverseArray(oldArray) {
+  let newArray = [];
+  for (let i in oldArray) {
+    newArray.unshift(oldArray[i]);
+  };
+  return newArray;
+};
+const oldArray = ["a", "b", "c"];
+const newArray = reverseArray(oldArray);
+console.log("Question 2 result:")
+console.log(`oldArray is ${oldArray}.`);
+console.log(`newArray is ${newArray}.`);
 
 
 
@@ -41,6 +60,20 @@
 // Put your answer below -------------------------
 
 
+const mightHaveFalsy = ["Millinocket", "", 0, "Bleep", false, 2, undefined];
+
+function removeFalsy(oldArray) {
+  const newArray = [];
+  for (let i of oldArray) {
+    // console.log('i', i);
+    if (i) { // if i is true, for some reason this didn't work for i != false with undefined
+      newArray.push(i);
+    };
+  };
+  return newArray;
+};
+console.log("Question 3 result:");
+console.log(removeFalsy(mightHaveFalsy));
 
 
 
@@ -61,7 +94,19 @@
 
 
 
+const arrayWithNestedArrays = [['name', 'Charlie'], ['color', 'brown'], ['age', 10]];
 
+function toObject(array) {
+  let newObject = {};
+  for (let i in array) {
+    const currentNestedArray = array[i];
+    console.log(currentNestedArray[1]);
+    newObject[currentNestedArray[0]] = currentNestedArray[1];
+  };
+  return newObject;
+};
+console.log("Question 4 result:");
+console.log(toObject(arrayWithNestedArrays));
 
 
 
@@ -80,7 +125,19 @@
 
 
 
+const arrayWithDuplicates = [1, 2, 3, 4, 5, 4, 3]
 
+function removeDuplicates(array) {
+  let newArray = [];
+  for (let i in array) {
+    if (!(array[i] in newArray)) {
+      newArray.push(array[i]);
+    };
+  };
+  return newArray;
+}
+console.log("Question 5 result:");
+console.log(removeDuplicates(arrayWithDuplicates))
 
 
 
@@ -100,7 +157,22 @@
 
 
 
+const arrayToCompare1 = [1,2,3,4]
+const arrayToCompare2 = [1,2,3,4]
+function testArrayInstance(array, array2) { // for the sake of cleaner code and DRY instead of having two for loops in one function
+  for (let i in array) {
+    if (array[i] !== array2[i]) {
+      return false;
+    };
+  };
+  return true;
+}
 
+function isArraySame(array, array2) {
+  return (testArrayInstance(array, array2) && testArrayInstance(array2, array)); // one line for the sake of cleaner code and DRY :)
+}
+console.log("Question 6 result:");
+console.log(isArraySame(arrayToCompare1, arrayToCompare2))
 
 
 
