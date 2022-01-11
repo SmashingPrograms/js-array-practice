@@ -23,6 +23,9 @@ function arr(n) {
   return array;
 };
 
+//Mady's other method, one-liner
+
+const arr = N => N === undefined ? [] : [...Array(N).keys()];
 
 // # 3
 // Drone Fly-By

@@ -8,16 +8,23 @@
 
 
 function repeatTimes(str, i) {
-  arr = [];
+  const arr = [];
   for (let j = 0; j < i; j++) {
     arr.push(str);
   };
   return arr;
 };
-console.log("Question 1 result:")
+console.log("Question 1 result:");
 console.log(repeatTimes("Wolf", 66));
 
-
+//Mady wrote as well:
+const anotherWay = function(str, i) {
+  return Array.from({
+    length: i
+  }, function() {
+    return str;
+  })
+};
 
 
 
@@ -41,7 +48,7 @@ function reverseArray(oldArray) {
 };
 const oldArray = ["a", "b", "c"];
 const newArray = reverseArray(oldArray);
-console.log("Question 2 result:")
+console.log("Question 2 result:");
 console.log(`oldArray is ${oldArray}.`);
 console.log(`newArray is ${newArray}.`);
 
@@ -66,7 +73,7 @@ function removeFalsy(oldArray) {
   const newArray = [];
   for (let i of oldArray) {
     // console.log('i', i);
-    if (i) { // if i is true, for some reason this didn't work for i != false with undefined
+    if (i) { // if i is true. Explanation: It's just "wat". JavaScript coersion is weird. Generally you need to test falsy values for truth, not for falsehood. Further explanation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
       newArray.push(i);
     };
   };
@@ -76,6 +83,11 @@ console.log("Question 3 result:");
 console.log(removeFalsy(mightHaveFalsy));
 
 
+//Filter method shown by Mady
+// let removeFalsy = function(arr) {
+//   trueArray = arr.slice().filter(Boolean);
+//   return trueArray;
+// };
 
 
 
@@ -100,16 +112,15 @@ function toObject(array) {
   let newObject = {};
   for (let i in array) {
     const currentNestedArray = array[i];
-    console.log(currentNestedArray[1]);
-    newObject[currentNestedArray[0]] = currentNestedArray[1];
+    const currentNestedArrayKey = currentNestedArray[0];
+    const currentNestedArrayValue = currentNestedArray[1];
+    console.log(currentNestedArrayValue);
+    newObject[currentNestedArrayKey] = currentNestedArrayValue;
   };
   return newObject;
 };
 console.log("Question 4 result:");
 console.log(toObject(arrayWithNestedArrays));
-
-
-
 
 
 
@@ -135,10 +146,9 @@ function removeDuplicates(array) {
     };
   };
   return newArray;
-}
+};
 console.log("Question 5 result:");
-console.log(removeDuplicates(arrayWithDuplicates))
-
+console.log(removeDuplicates(arrayWithDuplicates));
 
 
 
@@ -166,13 +176,13 @@ function testArrayInstance(array, array2) { // for the sake of cleaner code and 
     };
   };
   return true;
-}
+};
 
 function isArraySame(array, array2) {
   return (testArrayInstance(array, array2) && testArrayInstance(array2, array)); // one line for the sake of cleaner code and DRY :)
-}
+};
 console.log("Question 6 result:");
-console.log(isArraySame(arrayToCompare1, arrayToCompare2))
+console.log(isArraySame(arrayToCompare1, arrayToCompare2));
 
 
 
@@ -201,10 +211,27 @@ console.log(isArraySame(arrayToCompare1, arrayToCompare2))
 // Put your answer below -------------------------
 
 
+const testArray1 = [0, 1, 2, [3, 4, 5]];
+const testArray2 = [0, 1, 2, [[[3, 4]], [3]], [[53], [[[34]]]]];
 
+function returnSingleArray(oldArray) {
+  var newArray = [];
+  function removeSubarrays(oldArray) {
+    for (let i of oldArray) {
+      if (!Array.isArray(i)) {
+        newArray.push(i);
+      } else {
+        console.log("REcursion")
+        removeSubarrays(i);
+      };
+    };
+  };
+  removeSubarrays(oldArray);
+  return newArray;;
+};
 
-
-
+console.log(returnSingleArray(testArray1));
+console.log(returnSingleArray(testArray2));
 
 
 
