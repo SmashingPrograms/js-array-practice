@@ -221,7 +221,6 @@ function returnSingleArray(oldArray) {
       if (!Array.isArray(i)) {
         newArray.push(i);
       } else {
-        console.log("REcursion")
         removeSubarrays(i);
       };
     };
@@ -247,11 +246,34 @@ console.log(returnSingleArray(testArray2));
 // Put your answer below -------------------------
 
 
+const arrayToTest1 = [1, 2, 3, 4];
+const arrayToTest2 = [1, 2, 3, 4, 5];
+const arrayToTest3 = ["asdg", '3', 24, false, undefined, 1, 22, 1, 2, 3, 4, 5, 1, 2, 3, 4];
 
+function splitArray(oldArray, i) {
+  const newArray = [];
+  let subArray = [];
+  let ofMultiple = 1;
+  for (let j = 0; j < oldArray.length; j++) {
+    subArray.push(oldArray[j])
+    console.log(`Went thru the loop. ${oldArray[j]}.`)
+    if (ofMultiple !== i) {
+      ofMultiple += 1;
+    } else {
+      ofMultiple = 1;
+      newArray.push(subArray);
+      subArray = [];
+    };
+    if (j === (oldArray.length - 1) && subArray.length > 0) {
+      newArray.push(subArray);
+    }
+  };
+  return newArray;
+};
 
-
-
-
+console.log(splitArray(arrayToTest1, 2));
+console.log(splitArray(arrayToTest2, 3));
+console.log(splitArray(arrayToTest3, 5));
 
 
 
